@@ -58,7 +58,7 @@ if ( post_password_required() ) {
 
 		<?php understrap_comment_navigation( 'comment-nav-above' ); ?>
 
-		<ol class="comment-list">
+		<ol class="comment-list"> 
 
 			<?php
 			wp_list_comments(
@@ -70,11 +70,25 @@ if ( post_password_required() ) {
 			?>
 
 		</ol><!-- .comment-list -->
+		<div id="comments-container"></div>
 
 		<?php understrap_comment_navigation( 'comment-nav-below' ); ?>
 
 	<?php endif; // End of if have_comments(). ?>
 
-	<?php comment_form(); // Render comments form. ?>
+	<?php //comment_form(); // Render comments form. ?>
+
+
+	<!-- XXX Кастомная форма комментария  -->
+	<form id="comment-form" action="">
+		<textarea id="comment-content" name="comment-content"></textarea>
+		<input type="submit" value="Отправить комментарий">
+		<input type="hidden" id="comm_post_id" value="<?php echo get_the_ID(); ?>">
+		<?php wp_nonce_field( 'ajax-comment-nonce', 'security' ); ?>
+	</form>
+
 
 </div><!-- #comments -->
+
+
+
